@@ -45,15 +45,23 @@
 
 install.packages("tidyverse","httr","janitor")
 install.packages("pacman")
-library(tidyverse)
+library(tidyverse,httr)
 
 
 # BASIC OPERATORS ---------------------------------------------------------
 
 cristina <- 20
-
 clase_lep <-c('Marta','Emilia','Pablo')
 
+
+df <-httr::GET('https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/')
+##importamos el archivo xml
+library(readxl)
+preciosEESS_es <- read_excel("C:/Users/danie/Downloads/preciosEESS_es.xls", 
+                             skip = 3)
+View(preciosEESS_es)
+
+glimpse(preciosEESS_es) ##Ver las variables
 
 
 
