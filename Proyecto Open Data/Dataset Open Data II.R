@@ -21,4 +21,5 @@ library(readr)
 
 fraude2 <- read_csv("HandsOn/Proyecto Open Data/fraude2.csv")
 
+glimpse(fraude2)
 View(fraude2)
