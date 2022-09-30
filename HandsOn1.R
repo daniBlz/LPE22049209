@@ -54,8 +54,21 @@ cristina <- 20
 clase_lep <-c('Marta','Emilia','Pablo')
 
 
-df <-httr::GET('https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/')
-##importamos el archivo xml
+# GETTING DATA FROM INTERNET ----------------------------------------------
+
+url_ <- 'https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/'
+res_ <-httr::GET('https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/')
+xml2::read_xml(res_$content)
+
+f_raw <-jsonlite::fromJSON(url_)
+
+df_source <- f_raw$ListaEESSPrecio %>% glimpse()
+
+library('janitor')
+
+janitor::clean_names(df_source) %>% glimpse()
+# READING XML FILE --------------------------------------------------------
+
 library(readxl)
 preciosEESS_es <- read_excel("C:/Users/danie/Downloads/preciosEESS_es.xls", 
                              skip = 3)
