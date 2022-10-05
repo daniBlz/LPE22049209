@@ -67,6 +67,8 @@ df_source <- f_raw$ListaEESSPrecio %>% glimpse()
 library('janitor')
 
 janitor::clean_names(df_source) %>% glimpse()
+
+type_convert(df_source,locale = )
 # READING XML FILE --------------------------------------------------------
 
 library(readxl)
