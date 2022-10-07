@@ -55,6 +55,7 @@ clase_lep <-c('Marta','Emilia','Pablo')
 
 
 # GETTING DATA FROM INTERNET ----------------------------------------------
+library('janitor')
 
 url_ <- 'https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/'
 res_ <-httr::GET('https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/')
@@ -64,11 +65,9 @@ f_raw <-jsonlite::fromJSON(url_)
 
 df_source <- f_raw$ListaEESSPrecio %>% glimpse()
 
-library('janitor')
+df_source %>% janitor::clean_names() %>% type_convert(locale = locale(decimal_mark =',' )) %>% glimpse()
 
-janitor::clean_names(df_source) %>% glimpse()
 
-type_convert(df_source,locale = )
 # READING XML FILE --------------------------------------------------------
 
 library(readxl)
@@ -77,6 +76,7 @@ preciosEESS_es <- read_excel("C:/Users/danie/Downloads/preciosEESS_es.xls",
 View(preciosEESS_es)
 
 glimpse(preciosEESS_es) ##Ver las variables
+
 
 
 

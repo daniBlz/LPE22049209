@@ -13,7 +13,7 @@ install.packages('readxl')
 library(tidyverse,httr)
 library(readxl)
 
-#df <-httr::GET('kaggle datasets download -d chitwanmanchanda/fraudulent-transactions-data') con Kaggle no parece haber forma de importar datos con url
+df <-httr::GET('https://www.kaggle.com/datasets/chitwanmanchanda/fraudulent-transactions-data/download?datasetVersionNumber=1') 
 
 #Leemos los datos con readr
 
@@ -22,4 +22,7 @@ library(readr)
 fraude2 <- read_csv("HandsOn/Proyecto Open Data/fraude2.csv")
 
 glimpse(fraude2)
+
 View(fraude2)
+
+View(df)
