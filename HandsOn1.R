@@ -61,12 +61,12 @@ url_ <- 'https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/Precio
 res_ <-httr::GET('https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/')
 xml2::read_xml(res_$content)
 
+
 f_raw <-jsonlite::fromJSON(url_)
 
 df_source <- f_raw$ListaEESSPrecio %>% glimpse()
 
-df_source %>% janitor::clean_names() %>% type_convert(locale = locale(decimal_mark =',' )) %>% glimpse()
-
+df <-df_source %>% janitor::clean_names() %>% type_convert(locale = locale(decimal_mark =',' )) 
 
 # READING XML FILE --------------------------------------------------------
 
@@ -76,6 +76,16 @@ preciosEESS_es <- read_excel("C:/Users/danie/Downloads/preciosEESS_es.xls",
 View(preciosEESS_es)
 
 glimpse(preciosEESS_es) ##Ver las variables
+
+
+# CREATING NEW VARIABLES --------------------------------------------------
+
+##Clasificamos por gasolineras baratas y no baratas
+
+df_low <-df %>% mutate(lowcost = !rotulo %in% c('CESPSA','BP','SHELL','REPSOL'))
+
+
+
 
 
 
