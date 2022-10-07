@@ -86,7 +86,7 @@ df_low <-df %>% mutate(lowcost = !rotulo %in% c('CESPSA','BP','SHELL','REPSOL'))
 
 ##Precio medio del gasoleo en las CCAA
 
-df_low %>% select(precio_gasoleo_a, idccaa,rotulo,lowcost) %>% drop_na() %>% group_by(idccaa,lowcost) %>% summarise(mean(precio_gasoleo_a)) %>% view()
+df_means <-df_low %>% select(precio_gasoleo_a, idccaa,rotulo,lowcost) %>% drop_na() %>% group_by(idccaa,lowcost) %>% summarise(mean(precio_gasoleo_a)) %>% view()
 
 CCAA <- c('Andalucía','Aragón','Asturias','Baleares','Canarias','Cantabira','Castilla- La Mancha','Castilla y León','Cataluá','Extremadura','Galicia','Madrid','Murcia','Navarra','País Vasco','La Rioja','Valencia','Ceuta','Melilla')
 
@@ -94,6 +94,6 @@ idccaa <-c('01','02','03','04','05','06','07','08','09','10','11','12','13','14'
 
 ccaa <- data.frame(CCAA, idccaa)
 
-ds22049209 <- merge(df_low,ccaa,by =('idccaa'))
+ds22049209 <- merge(df_means,ccaa,by =('idccaa'))
 
 
