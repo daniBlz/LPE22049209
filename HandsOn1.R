@@ -84,7 +84,9 @@ glimpse(preciosEESS_es) ##Ver las variables
 
 df_low <-df %>% mutate(lowcost = !rotulo %in% c('CESPSA','BP','SHELL','REPSOL'))
 
+##Precio medio del gasoleo en las CCAA
 
+df_low %>% select(precio_gasoleo_a, idccaa,rotulo,lowcost) %>% drop_na() %>% group_by(idccaa,lowcost) %>% summarise(mean(precio_gasoleo_a)) %>% view()
 
 
 
