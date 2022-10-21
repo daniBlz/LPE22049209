@@ -27,4 +27,16 @@ pacman::p_load(pacman,magrittr,productplots,psych,RColorBrewer,tidyverse)
 
 # LOAD AND PREPARE DATA ---------------------------------------------------
 browseURL('http://j.mp/37Wxvv7')
+?happy
 df<-happy %>% as_tibble()
+#Check levels
+levels(df$happy)
+#Reverse levels
+df %<>% mutate(happy = fct_rev(happy)) #Magrittr
+#df %>% mutate(marta_reverse = fct_rev(happy))
+
+
+# OUTCOME VARIABLES : HAPPINESS -------------------------------------------
+
+df %>%ggplot()+geom_bar(aes(happy,fill = happy))+ 
+  theme(axis.title.x = element_blank(),legend.position = 'none')
