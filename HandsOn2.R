@@ -40,3 +40,39 @@ df %<>% mutate(happy = fct_rev(happy)) #Magrittr
 
 df %>%ggplot()+geom_bar(aes(happy,fill = happy))+ 
   theme(axis.title.x = element_blank(),legend.position = 'none')
+#Frequencies of happy
+df %>% count(happy)
+df %<>% select(happy:health) %>% view()
+df %<>% filter(!is.na(happy))
+
+
+# HAPPINESS AND GENDER ----------------------------------------------------
+
+
+df %>%  ggplot(aes(sex,fill = happy))+geom_bar(position = 'fill')
+
+
+# HAPPINESS AND MARITAL STATUS --------------------------------------------
+
+
+df %>% ggplot(aes(marital,fill = happy))+geom_bar(position = 'fill')
+
+
+# HAPPINESS AND EDUCATION LEVEL -------------------------------------------
+
+df %>% ggplot(aes(degree,fill = happy))+geom_bar(position = 'fill')
+
+
+# HAPPINESS AND MONEY -----------------------------------------------------
+df %>% ggplot(aes(finrela,fill = happy))+geom_bar(position = 'fill')
+
+
+# HAPPINESS AND HEALTH ----------------------------------------------------
+
+df %>% ggplot(aes(health,fill = happy))+geom_bar(position = 'fill')
+
+
+# DICHOTOMUS MARRIED / NOT VARIABLE ---------------------------------------
+
+df %<>%mutate(married = if_else(marital == 'married','yes','no')) %>% 
+  (married=as_factor(married)) %>% view() 
